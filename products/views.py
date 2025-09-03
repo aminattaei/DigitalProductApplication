@@ -1,20 +1,41 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
+
+from rest_framework import status
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAuthenticated
+
+from .serializers import ProductSerializer
 from .models import Category,File,Product
+from .forms import CheckoutForm
+#  Views -->
 
-def home_page(request):
-    return render(request,'index.html',{})
+class HomeProductListView(generic.ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = "index.html"
+
+class CheckoutFormView(generic.FormView):
+    template_name = 'checkout.html'
+    form_class = CheckoutForm
+    success_url = reverse_lazy('home_page')
+
+class ProductListView(generic.ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = "store.html"
 
 
-def checkout_page(request):
-    return render(request,'checkout.html',{})
+class ProductDetailView(generic.DetailView):
+    model = Product
+    template_name = "product.html"
 
-def shop_page(request):
-    products = Product.objects.all()
-    return render(request,'store.html',{'products':products})
 
-def product_page(request):
-    return render(request,'product.html',{})
+# Api Views -->
 
-def blank_page(request):
-    return render(request,'blank.html',{})
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
