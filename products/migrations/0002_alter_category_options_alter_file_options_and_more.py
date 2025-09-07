@@ -6,62 +6,77 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0001_initial'),
+        ("products", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
+            name="category",
             options={},
         ),
         migrations.AlterModelOptions(
-            name='file',
+            name="file",
             options={},
         ),
         migrations.AlterModelOptions(
-            name='product',
+            name="product",
             options={},
         ),
         migrations.AddField(
-            model_name='file',
-            name='avatar',
-            field=models.ImageField(blank=True, null=True, upload_to='%(class)s/avatar/', verbose_name='avatar'),
+            model_name="file",
+            name="avatar",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to="%(class)s/avatar/",
+                verbose_name="avatar",
+            ),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='avatar',
-            field=models.ImageField(blank=True, null=True, upload_to='%(class)s/avatar/', verbose_name='avatar'),
+            model_name="category",
+            name="avatar",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to="%(class)s/avatar/",
+                verbose_name="avatar",
+            ),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='is_enable',
-            field=models.BooleanField(default=True, verbose_name='is enable'),
+            model_name="category",
+            name="is_enable",
+            field=models.BooleanField(default=True, verbose_name="is enable"),
         ),
         migrations.AlterField(
-            model_name='file',
-            name='is_enable',
-            field=models.BooleanField(default=True, verbose_name='is enable'),
+            model_name="file",
+            name="is_enable",
+            field=models.BooleanField(default=True, verbose_name="is enable"),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='avatar',
-            field=models.ImageField(blank=True, null=True, upload_to='%(class)s/avatar/', verbose_name='avatar'),
+            model_name="product",
+            name="avatar",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to="%(class)s/avatar/",
+                verbose_name="avatar",
+            ),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='is_enable',
-            field=models.BooleanField(default=True, verbose_name='is enable'),
+            model_name="product",
+            name="is_enable",
+            field=models.BooleanField(default=True, verbose_name="is enable"),
         ),
         migrations.AlterModelTable(
-            name='category',
+            name="category",
             table=None,
         ),
         migrations.AlterModelTable(
-            name='file',
+            name="file",
             table=None,
         ),
         migrations.AlterModelTable(
-            name='product',
+            name="product",
             table=None,
         ),
     ]

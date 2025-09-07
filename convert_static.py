@@ -40,16 +40,10 @@ def convert_static_links(html_file_path, output_file_path):
 
 
 # استفاده
-convert_static_links(
-    "templates/", "templates/"
-)
-
-
+convert_static_links("templates/", "templates/")
 
 
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−− New Version −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-
-
 
 
 # import re, os
@@ -63,9 +57,9 @@ convert_static_links(
 #                     content = file.read()
 
 #                 # تغییر href و src
-#                 content = re.sub(r'href="([^"]+\.(css|js|html))"', 
+#                 content = re.sub(r'href="([^"]+\.(css|js|html))"',
 #                                  lambda m: f'href="{{% static \'{m.group(1)}\' %}}"', content)
-#                 content = re.sub(r'src="([^"]+\.(js|css|png|jpg|jpeg|gif|svg|webp))"', 
+#                 content = re.sub(r'src="([^"]+\.(js|css|png|jpg|jpeg|gif|svg|webp))"',
 #                                  lambda m: f'src="{{% static \'{m.group(1)}\' %}}"', content)
 
 #                 # اضافه کردن load static

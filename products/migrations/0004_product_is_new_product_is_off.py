@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0003_product_is_stock_product_price_product_stars'),
+        ("products", "0003_product_is_stock_product_price_product_stars"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='is_new',
-            field=models.BooleanField(default=True, verbose_name='is new product?'),
+            model_name="product",
+            name="is_new",
+            field=models.BooleanField(default=True, verbose_name="is new product?"),
         ),
         migrations.AddField(
-            model_name='product',
-            name='is_off',
-            field=models.BooleanField(default=True, verbose_name='product have off?'),
+            model_name="product",
+            name="is_off",
+            field=models.BooleanField(default=True, verbose_name="product have off?"),
         ),
     ]

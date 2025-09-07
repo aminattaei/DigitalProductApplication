@@ -2,8 +2,17 @@
 {% load static %}
 {% block title %} Shop {% endblock title %}
 
-{% block content %}
 
+
+{% block content %}
+<style>
+	.product-img{
+		width:25rem;
+		height: 25rem;
+		margin: 2rem auto 2rem auto;
+	}
+
+</style>
 
 		<!-- SECTION -->
 		<div class="section">
@@ -223,13 +232,19 @@
 						<div class="row">
 							
 							{% for product in products %}
-							
-							
 								<!-- product -->
 								<div class="col-md-4 col-xs-6">
 									<div class="product">
 										<div class="product-img">
-											<img src="{{ product.avatar.url }}" alt="{{ product.title }}">
+											{% comment %} <img class="product-img" src="{{ product.get_avatar_url }}" alt="{{ product.title }}"> {% endcomment %}
+
+											{% if product.avatar %}
+												<img class="product-img" src="{{ product.avatar.url }}" alt="{{ product.title }}">
+											
+											{% else %}
+												<img class="product-img" src="{% static 'img/default_product.png' %}" alt="{{ product.title }}">
+											{% endif %}
+
 											<div class="product-label">
 												{% if product.is_new %}
 													<span class="new">NEW</span>
@@ -248,7 +263,7 @@
 											</p>
 											<h3 class="product-name"><a href="#">{{ product.title }}</a></h3>
 											{% if product.is_off %}
-												<del class="product-old-price">${{ product.price }}/del>
+												<del class="product-old-price">${{ product.price }}</del>
 												<h4 class="product-price">${{ product.off_price }}</h4>	
 											{% else %}
 												<h4 class="product-price">${{ product.price }}</h4>	
@@ -273,6 +288,7 @@
 								<!-- /product -->
 							{% endfor %}
 							
+
 						</div>
 						<!-- /store products -->
 

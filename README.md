@@ -1,7 +1,7 @@
 # 🛒 Electro - Online Digital Store
 
 Electro is a modern web application designed for selling digital products such as laptops, smartphones, and other electronic devices.  
-It has been built with **Django**, **PostgreSQL**, and **Django REST Framework (DRF)** to ensure scalability, reliability, and flexibility.  
+It has been built with **Django**, **PostgreSQL**, and **Django REST Framework (DRF)** **DJango-jwtAuthentication** to ensure scalability, reliability, and flexibility.  
 
 The project demonstrates a clean architecture where the backend handles all business logic and database operations, while the frontend is based on Django templates and can be easily replaced with React, Vue, or any mobile app that consumes the RESTful API.  
 
