@@ -15,10 +15,10 @@ router.register("comments", views.CommentViewSet, basename="comment-viewset")
 router.register("contacts", views.ContactViewSet, basename="contact-viewset")
 
 
-
 urlpatterns = [
     path("", views.home_page, name="home_page"),
     path("checkout/", views.CheckoutFormView.as_view(), name="checkout_page"),
     path("products/", views.ProductListView.as_view(), name="shop_page"),
+    path("product/<int:pk>/", views.ProductDetailView.as_view(), name="Product_detail"),
     path("api/", include(router.urls)),
 ]

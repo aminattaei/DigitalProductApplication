@@ -7,6 +7,7 @@ from django.utils import timezone
 
 class BaseDigitalModel(models.Model):
     title = models.CharField(_("title"), max_length=50)
+    description = models.TextField(_("description"), blank=True)
     avatar = models.ImageField(
         _("avatar"), upload_to="%(class)s/avatar/", blank=True, null=True
     )
@@ -38,7 +39,6 @@ class Category(BaseDigitalModel):
         null=True,
         on_delete=models.CASCADE,
     )
-    description = models.TextField(_("description"), blank=True)
 
     class Meta:
         verbose_name = _("Category")
@@ -46,7 +46,6 @@ class Category(BaseDigitalModel):
 
 
 class Product(BaseDigitalModel):
-    description = models.TextField(_("description"), blank=True)
     categories = models.ManyToManyField(
         Category, verbose_name=_("categories"), blank=True
     )
@@ -60,6 +59,9 @@ class Product(BaseDigitalModel):
     def stars_range(self):
         return range(self.stars)
 
+    def get_absolute_url(self):
+        return reverse("Product_detail", kwargs={"pk": self.pk})
+
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
@@ -67,7 +69,7 @@ class Product(BaseDigitalModel):
 
 class File(BaseDigitalModel):
     product = models.ForeignKey(
-        Product, verbose_name=_("product"), on_delete=models.CASCADE
+        Product, verbose_name=_("product"),related_name='images', on_delete=models.CASCADE
     )
     file = models.FileField(_("file"), upload_to="files/%Y/%m/%d/", max_length=100)
 
@@ -122,7 +124,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        return f"{self.quantity} x {self.product.title}"
 
     def get_total_price(self):
         return self.product.price * self.quantity

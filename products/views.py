@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -36,7 +36,8 @@ from .forms import CheckoutForm
 
 
 def home_page(request):
-    return render(request, "index.html", {})
+    products = Product.objects.all()
+    return render(request, "index.html", {"products": products})
 
 
 class HomeProductListView(generic.ListView):
