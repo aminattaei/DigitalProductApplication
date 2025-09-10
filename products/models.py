@@ -9,7 +9,7 @@ class BaseDigitalModel(models.Model):
     title = models.CharField(_("title"), max_length=50)
     description = models.TextField(_("description"), blank=True)
     avatar = models.ImageField(
-        _("avatar"), upload_to="%(class)s/avatar/", blank=True, null=True
+        _("avatar"), upload_to="files/avatar/", blank=True, null=True
     )
     is_enable = models.BooleanField(_("is enable"), default=True)
     created_at = models.DateTimeField(_("created time"), auto_now_add=True)

@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "products",
+    'users',
     "rest_framework",
     "drf_spectacular",
 ]
@@ -135,3 +136,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,  # Do not include schema endpoint by default
 }
+
+
+AUTH_USER_MODEL = "users.CustomUser"

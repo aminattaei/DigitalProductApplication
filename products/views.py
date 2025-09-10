@@ -2,8 +2,6 @@ from django.shortcuts import render,get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
-
-from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -37,7 +35,8 @@ from .forms import CheckoutForm
 
 def home_page(request):
     products = Product.objects.all()
-    return render(request, "index.html", {"products": products})
+    categories = Category.objects.all()
+    return render(request, "index.html", {"products": products,'categories':categories})
 
 
 class HomeProductListView(generic.ListView):
