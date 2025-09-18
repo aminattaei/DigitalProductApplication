@@ -57,6 +57,24 @@
 			</div>
 			<!-- /TOP HEADER -->
 
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert 
+						{% if message.tags %} alert-{{ message.tags }} {% else %} alert-info {% endif %}" 
+						role="alert">
+
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+
+
+			
+
 			<!-- MAIN HEADER -->
 			<div id="header">
 				<!-- container -->

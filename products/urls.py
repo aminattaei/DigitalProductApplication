@@ -21,4 +21,6 @@ urlpatterns = [
     path("products/", views.ProductListView.as_view(), name="shop_page"),
     path("product/<int:pk>/", views.ProductDetailView.as_view(), name="Product_detail"),
     path("api/", include(router.urls)),
+    path('register/',views.signUp_page,name="signup-page"),
+    path('login/',views.login_page,name="login_page"),
 ]

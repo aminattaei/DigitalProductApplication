@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} Login Page {% endblock title %}
+
+{% block content %}
+
+<style>
+
+    .button-control{
+        width: 100%;
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+</style>
+
+
+{% if messages %}
+    <div class="alert alert-{{ messages.tags }}" role="{{ messages.tags }}">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+  </div>
+
+  <button type="submit" class="btn btn-primary button-control">Submit</button>
+</form>
+
+{% endblock content %}

@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Comment
 
 class CheckoutForm(forms.Form):
     first_name = forms.CharField(
@@ -28,3 +28,13 @@ class CheckoutForm(forms.Form):
         required=False,
         widget=forms.Textarea(attrs={"class": "form-control", "rows": 3}),
     )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['product','customer','text','stars','is_approved']
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(required=True)
+    password = forms.CharField(max_length=50, required=True)

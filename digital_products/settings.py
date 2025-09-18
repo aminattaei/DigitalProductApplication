@@ -23,11 +23,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "products",
     'users',
     "rest_framework",
     "drf_spectacular",
+    'widget_tweaks',
+    'registration',
+
 ]
+SITE_ID = 1
+ACCOUNT_ACTIVATION_DAYS = 7   
+LOGIN_REDIRECT_URL = "/"
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -139,3 +147,6 @@ SPECTACULAR_SETTINGS = {
 
 
 AUTH_USER_MODEL = "users.CustomUser"
+LOGOUT_REDIRECT_URL = 'products/'
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

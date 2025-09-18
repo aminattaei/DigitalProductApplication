@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.conf.urls.static import static
 from django.utils import timezone
-
+from users.models import CustomUser
 
 class BaseDigitalModel(models.Model):
     title = models.CharField(_("title"), max_length=50)
@@ -52,7 +52,7 @@ class Product(BaseDigitalModel):
     stars = models.IntegerField(_("star count"), default=0, blank=True)
     price = models.IntegerField(_("price"))
     is_stock = models.BooleanField(_("in stock?"), default=True)
-    is_new = models.BooleanField(_("is new product?"), default=False)
+    is_new = models.BooleanField(_("is new product?"), default= True)
     is_off = models.BooleanField(_("product have off?"), default=False)
     off_price = models.CharField(_("off price"), max_length=50, blank=True, null=True)
 
@@ -86,6 +86,8 @@ class Customer(models.Model):
     phone = models.CharField(_("phone number"), max_length=11)
 
     email = models.EmailField(_("email"), max_length=254)
+
+    user = models.OneToOneField(CustomUser, verbose_name=_("user"), on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("customer")
@@ -179,7 +181,12 @@ class Comment(models.Model):
     )
     text = models.TextField()
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    stars = models.IntegerField(_("star count"), default=0, blank=True)
+    is_approved = models.BooleanField(default=False)
 
+    def stars_range(self):
+        return range(self.stars)
+        
     class Meta:
         verbose_name = _("Comment")
         verbose_name_plural = _("Comments")
