@@ -247,23 +247,25 @@
 												
 												<ul class="reviews">
 
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
+													{% for comment in comments %}
+													
+														<li>
+															<div class="review-heading">
+																<h5 class="name">{{ comment.cusotmer.first_name }}</h5>
+																<p class="date">{{ comment.created_at }}</p>
+																<div class="review-rating">
+																	{% for star in comment.stars_range %}
+																		<i class="fa fa-star"></i>
+																	{% endfor %}
+																	{% comment %} <i class="fa fa-star-o empty"></i> {% endcomment %}
+																</div>
 															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
+															<div class="review-body">
+																<p>{{ comment.text }}</p>
+															</div>
+														</li>
 
+													{% endfor %}
 													
 
 												</ul>
@@ -284,18 +286,18 @@
 										<!-- Review Form -->
 										<div class="col-md-3">
 											<div id="review-form">
-												<form class="review-form" method="post	">
-													<input class="input" type="text" name="name" placeholder="Your Name">
-													<input class="input" type="email" name='email' placeholder="Your Email">
+												<form action="/product/1/review/" class="review-form" method="post">
+													{% csrf_token %}
+
 													<textarea class="input" placeholder="Your Review" name="text"></textarea>
 													<div class="input-rating">
 														<span>Your Rating: </span>
 														<div class="stars">
-															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+															<input id="star5" name="stars" value="5" type="radio"><label for="star5"></label>
+															<input id="star4" name="stars" value="4" type="radio"><label for="star4"></label>
+															<input id="star3" name="stars" value="3" type="radio"><label for="star3"></label>
+															<input id="star2" name="stars" value="2" type="radio"><label for="star2"></label>
+															<input id="star1" name="stars" value="1" type="radio"><label for="star1"></label>
 														</div>
 													</div>
 													<button class="primary-btn">Submit</button>

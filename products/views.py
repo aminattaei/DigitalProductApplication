@@ -59,7 +59,6 @@ class CheckoutFormView(generic.FormView):
 
 # -------------- Review / Comment View --------------
 
-@login_required(login_url="/login/")
 def review_model_view(request, pk):
     """
     Handle product reviews/comments:
@@ -68,41 +67,53 @@ def review_model_view(request, pk):
     - Comments require admin approval
     - Supports rating (stars)
     """
+    # Get the product or return 404
     product = get_object_or_404(Product, pk=pk)
 
+    # Bind POST data to CommentForm or create empty form for GET request
+    form = CommentForm(request.POST or None)
+
     if request.method == 'POST':
-        # Bind POST data to CommentForm
-        form = CommentForm(request.POST)
-
-        if request.user.is_authenticated:
-            user = request.user.customer
-            # Check if the user already commented on this product
-            user_comment = Comment.objects.filter(customer=user, product=product).first()
-
-            if user_comment:
-                messages.error(request, f"You have already commented on {product.title}.")
-                return redirect(product.get_absolute_url())
-
-            if form.is_valid():
-                # Create new comment with approval=False
-                Comment.objects.create(
-                    product=product,
-                    customer=user,
-                    text=form.cleaned_data['text'],
-                    stars=form.cleaned_data['stars'],
-                    is_approved=False
-                )
-                messages.success(request, "Your comment has been registered and will be displayed after admin approval.")
-                return redirect(product.get_absolute_url())
-        else:
+        # Check if user is authenticated
+        if not request.user.is_authenticated:
             messages.error(request, "You must be logged in to submit a comment.")
             return redirect('login_page')
 
-    else:
-        # For GET requests, show empty form
-        form = CommentForm()
+        # Ensure a Customer object exists for the logged-in user
+        customer, created = Customer.objects.get_or_create(
+            user=request.user,
+            defaults={
+                "first_name": getattr(request.user, 'first_name', 'FirstName'),
+                "last_name": getattr(request.user, 'last_name', 'LastName'),
+                "email": getattr(request.user, 'email', 'example@example.com'),
+                "phone": "00000000000",  # Default value
+            }
+        )
 
-    # Get approved comments and average stars
+        # Check if the user already commented on this product
+        if Comment.objects.filter(customer=customer, product=product).exists():
+            messages.error(request, f"You have already commented on {product.title}.")
+            return redirect(product.get_absolute_url())
+
+        # Save new comment if form is valid
+        if form.is_valid():
+            Comment.objects.create(
+                product=product,
+                customer=customer,
+                text=form.cleaned_data['text'],
+                stars=form.cleaned_data['stars'],
+                is_approved=False  # Set True if you want to auto-approve
+            )
+            messages.success(
+                request,
+                "Your comment has been registered and will be displayed after admin approval."
+            )
+            return redirect(product.get_absolute_url())
+        else:
+            # Form is invalid
+            messages.error(request, "There was a problem with your form submission.")
+
+    # For GET request or invalid POST: display the form and approved comments
     approved_comments = Comment.objects.filter(product=product, is_approved=True)
     avg_stars = approved_comments.aggregate(Avg("stars"))["stars__avg"] or 0
 
@@ -112,8 +123,7 @@ def review_model_view(request, pk):
         "comments": approved_comments,
         "avg_stars": avg_stars,
     }
-
-    return render(request, "product_detail.html", context)
+    return render(request, "product.html", context)
 
 
 # -------------- Authentication Views --------------

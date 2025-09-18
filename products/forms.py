@@ -33,7 +33,7 @@ class CheckoutForm(forms.Form):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['product','customer','text','stars','is_approved']
+        fields = ['text','stars']
 
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True)

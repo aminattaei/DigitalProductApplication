@@ -19,6 +19,7 @@ urlpatterns = [
     path("", views.home_page, name="home_page"),
     path("checkout/", views.CheckoutFormView.as_view(), name="checkout_page"),
     path("products/", views.ProductListView.as_view(), name="shop_page"),
+    path("product/<int:pk>/review/", views.review_model_view, name="product_review"),
     path("product/<int:pk>/", views.ProductDetailView.as_view(), name="Product_detail"),
     path("api/", include(router.urls)),
     path('register/',views.signUp_page,name="signup-page"),

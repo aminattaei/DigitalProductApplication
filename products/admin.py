@@ -44,7 +44,14 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
 
 
-admin.site.register(Comment)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("id", "product", "customer", "stars", "is_approved", "created_at")
+    list_filter = ("is_approved", "stars", "created_at")
+    search_fields = ("text", "customer__user__username", "product__title")
+    ordering = ("-created_at",)
+
+
 admin.site.register(Contact)
 
 
