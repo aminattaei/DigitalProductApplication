@@ -7,18 +7,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0014_alter_category_avatar_alter_file_avatar_and_more'),
+        ("products", "0014_alter_category_avatar_alter_file_avatar_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='order',
-            name='date',
-            field=models.DateField(default=datetime.datetime(2025, 9, 12, 22, 50, 10, 238866, tzinfo=datetime.timezone.utc)),
+            model_name="order",
+            name="date",
+            field=models.DateField(
+                default=datetime.datetime(
+                    2025, 9, 12, 22, 50, 10, 238866, tzinfo=datetime.timezone.utc
+                )
+            ),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='is_new',
-            field=models.BooleanField(default=True, verbose_name='is new product?'),
+            model_name="product",
+            name="is_new",
+            field=models.BooleanField(default=True, verbose_name="is new product?"),
         ),
     ]

@@ -25,15 +25,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "products",
-    'users',
+    "users",
     "rest_framework",
     "drf_spectacular",
-    'widget_tweaks',
-    'registration',
-
+    "widget_tweaks",
+    "registration",
 ]
 SITE_ID = 1
-ACCOUNT_ACTIVATION_DAYS = 7   
+ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = "/"
 
 
@@ -147,6 +146,6 @@ SPECTACULAR_SETTINGS = {
 
 
 AUTH_USER_MODEL = "users.CustomUser"
-LOGOUT_REDIRECT_URL = 'products/'
+LOGOUT_REDIRECT_URL = "products/"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

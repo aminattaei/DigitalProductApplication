@@ -7,18 +7,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0016_comment_stars_alter_order_date'),
+        ("products", "0016_comment_stars_alter_order_date"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='is_approved',
+            model_name="comment",
+            name="is_approved",
             field=models.BooleanField(default=False),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='date',
-            field=models.DateField(default=datetime.datetime(2025, 9, 15, 7, 2, 15, 341028, tzinfo=datetime.timezone.utc)),
+            model_name="order",
+            name="date",
+            field=models.DateField(
+                default=datetime.datetime(
+                    2025, 9, 15, 7, 2, 15, 341028, tzinfo=datetime.timezone.utc
+                )
+            ),
         ),
     ]

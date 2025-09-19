@@ -1,5 +1,12 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, Group, Permission
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    PermissionsMixin,
+    BaseUserManager,
+    Group,
+    Permission,
+)
 from django.db import models
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, phone_number, password=None, **extra_fields):
@@ -24,28 +31,21 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, phone_number, password, **extra_fields)
 
 
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True, blank=True)
     phone_number = models.CharField(max_length=15, unique=True, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    groups = models.ManyToManyField(
-        Group,
-        related_name="customuser_set",
-        blank=True
-    )
+    groups = models.ManyToManyField(Group, related_name="customuser_set", blank=True)
     user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="customuser_set",
-        blank=True
+        Permission, related_name="customuser_set", blank=True
     )
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = "email"   
-    REQUIRED_FIELDS = ["phone_number"]  
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["phone_number"]
 
     def __str__(self):
         return self.email if self.email else self.phone_number

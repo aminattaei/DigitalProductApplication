@@ -21,7 +21,11 @@ urlpatterns = [
     path("products/", views.ProductListView.as_view(), name="shop_page"),
     path("product/<int:pk>/review/", views.review_model_view, name="product_review"),
     path("product/<int:pk>/", views.ProductDetailView.as_view(), name="Product_detail"),
+    path('add_to_cart/',views.add_multiple_to_cart,name="add_multiple_to_cart"),
+    path('cart_summary/',views.cart_summary_view,name="cart_page"),
+    path('update_cart_item/<int:item_id>',views.update_cart_item,name="update_cart_item"),
     path("api/", include(router.urls)),
-    path('register/',views.signUp_page,name="signup-page"),
-    path('login/',views.login_page,name="login_page"),
+    path("register/", views.signUp_page, name="signup-page"),
+    path("login/", views.login_page, name="login_page"),
+    
 ]

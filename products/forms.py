@@ -1,6 +1,7 @@
 from django import forms
 from .models import Comment
 
+
 class CheckoutForm(forms.Form):
     first_name = forms.CharField(
         max_length=50, widget=forms.TextInput(attrs={"class": "form-control"})
@@ -33,7 +34,8 @@ class CheckoutForm(forms.Form):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['text','stars']
+        fields = ["text", "stars"]
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True)

@@ -281,8 +281,15 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<form method="POST" action="{% url 'add_multiple_to_cart' %}">
+												{% csrf_token %}
+												<input type="hidden" name="product_ids" value="{{ product.id }}">
+												<input type="hidden" name="quantities" value="1">
+												<button type="submit">Add to Cart</button>
+											</form>
+
 										</div>
+
 									</div>
 								</div>
 								<!-- /product -->

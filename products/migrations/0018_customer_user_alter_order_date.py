@@ -9,20 +9,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0017_comment_is_approved_alter_order_date'),
+        ("products", "0017_comment_is_approved_alter_order_date"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customer',
-            name='user',
-            field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='user'),
+            model_name="customer",
+            name="user",
+            field=models.OneToOneField(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="user",
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='order',
-            name='date',
-            field=models.DateField(default=datetime.datetime(2025, 9, 15, 7, 26, 42, 976782, tzinfo=datetime.timezone.utc)),
+            model_name="order",
+            name="date",
+            field=models.DateField(
+                default=datetime.datetime(
+                    2025, 9, 15, 7, 26, 42, 976782, tzinfo=datetime.timezone.utc
+                )
+            ),
         ),
     ]
