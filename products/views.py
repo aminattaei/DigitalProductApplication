@@ -67,6 +67,7 @@ def review_model_view(request, pk):
     - Comments require admin approval
     - Supports rating (stars)
     """
+    
     # Get the product or return 404
     product = get_object_or_404(Product, pk=pk)
 
